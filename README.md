@@ -7,13 +7,14 @@ This site contains geospatial data for Barents Sea ocean current arrows, which a
 The arrows are based on publications by Harald Gjøsæter at Institute of Marine Research and complemented by the knowledge of oceanographers/researchers at the Norwegian Polar Institute (Arild Sundfjord, Laura de Steur, Paul Dodd, Mikko Vihtakari). These current arrows are meant to stay updated and any new knowledge/discussions about the arrows can be directed to the site maintainer (see the *Contact information* section).
 
 ![Figure 1. Barents Sea ocean currents produced by the PlotSvalbard package](README_files/figure-html/unnamed-chunk-1-1.png)
-
+Figure 1. Barents Sea ocean currents produced by the PlotSvalbard package
 
 ## Usage
 
 The current arrows are stored as directed spatial lines with relatively few nodes to make editing of the current arrows easier. The [**PlotSvalbard**](https://github.com/MikkoVihtakari/PlotSvalbard) package runs an X-spline (`graphics::xspline(..., shape = -0.6)`) through the nodes before plotting making the arrows appear smoothed. People using other software than R (GIS distributions, Python, Matlab, etc.) can use a similar strategy to smooth the arrows (the code to do the smoothing is included in [`Smooth csv and plot.R`](https://github.com/MikkoVihtakari/Barents-Sea-currents/blob/master/Smooth%20csv%20and%20plot.R) file). 
 
 ![Figure 2. Original data with few nodes (A) and smoothed (B) Barents Sea ocean current arrows. The original data has few nodes to make editing the current arrows easier.](README_files/figure-html/unnamed-chunk-2-1.png)
+Figure 2. Original data with few nodes (A) and smoothed (B) Barents Sea ocean current arrows. The original data has few nodes to make editing the current arrows easier.
 
 ## File types
 
