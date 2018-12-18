@@ -9,7 +9,7 @@ Barents Sea ocean-current arrows
 
 This site contains geospatial data for Barents Sea ocean current arrows, which are meant for scientific publications as *"Figure 1"*-type arrows indicating the *influence* of Atlantic and Arctic surface currents on different areas within the region. The current arrows are generalizations and do not consider mass-balance, seasonality, or other variations. The arrows are, however, based on the current understanding of ocean currents in the Barents and Greenland Sea regions.
 
-The arrows are based on publications by Harald Gjøsæter at Institute of Marine Research and complemented by the knowledge of oceanographers/researchers at the Norwegian Polar Institute (Arild Sundfjord, Laura de Steur, Paul Dodd, Mikko Vihtakari). These current arrows are meant to stay updated and any new knowledge/discussions about the arrows can be directed to the site maintainer (see the *Contact information* section).
+The arrows are based on publications by Harald Gjøsæter at Institute of Marine Research and complemented by the knowledge of oceanographers/researchers at the Norwegian Polar Institute (Arild Sundfjord, Laura de Steur, Mikko Vihtakari). These current arrows are meant to stay updated and any new knowledge/discussions about the arrows can be directed to the site maintainer (see the *Contact information* section).
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, dpi=300, fig.cap = "Figure 1. Barents Sea ocean currents produced by the PlotSvalbard package"}
 knitr::opts_chunk$set(fig.width=15, fig.height=8)
@@ -19,7 +19,7 @@ library(cowplot)
 
 basemap("barentssea", bathymetry = TRUE, currents = TRUE, current.size = "scaled", grid.col = NA, legends = c(FALSE, TRUE))
 ```
-
+Figure 1. Barents Sea ocean currents produced by the PlotSvalbard package
 
 ## Usage
 
@@ -36,6 +36,7 @@ p2 <- basemap("barentssea", currents = TRUE, grid.col = NA, legend.position = "n
 
 cowplot::plot_grid(p1, p2, ncol = 2, labels = "AUTO")
 ```
+Figure 2. Original data with few nodes (A) and smoothed (B) Barents Sea ocean current arrows. The original data has few nodes to make editing the current arrows easier.
 
 ## File types
 
@@ -47,7 +48,7 @@ The repository also contains [ready-made Barents Sea maps](https://github.com/Mi
 
 If you use the arrows in your publications, please cite them as:
 
-Vihtakari M, Sundfjord A, de Steur L (2019). Barents Sea ocean-current arrows modified from Eriksen et al. (2018). Norwegian Polar Institute and Institute of Marine Research. Available at: https://github.com/MikkoVihtakari/PlotSvalbard
+Vihtakari M, Sundfjord A, de Steur L (2019). Barents Sea ocean-current arrows modified from Eriksen et al. (2018). Norwegian Polar Institute and Institute of Marine Research. Available at: https://github.com/MikkoVihtakari/Barents-Sea-currents
 
 ## References
 
