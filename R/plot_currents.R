@@ -29,14 +29,18 @@ cur_arrow <- arrow(type = "open", angle = 15, ends = "last",
                    length = unit(0.25, "lines"))
 
 # Read a current shapefile, smooth the nodes into curves, reproject to the
-# basemap CRS and return a tidy data frame ready for geom_path().
+# basemap CRS and return a tidy data frame ready for geom_path(). `lat` carries
+# the geographic latitude of each vertex so a polar map can drop arrows that
+# fall south of its extent.
 load_currents <- function(file, type, crs.out) {
   x <- sf::st_transform(sf::st_read(file, quiet = TRUE), 4326)
   x <- smoothr::smooth(x, method = "spline")          # node -> curve smoothing
+  geo <- as.data.frame(sf::st_coordinates(x))         # lon/lat, vertex order preserved
   x <- sf::st_transform(x, crs.out)
   co <- as.data.frame(sf::st_coordinates(x))          # X, Y, L1 (feature index)
   data.frame(
     X = co$X, Y = co$Y,
+    lat = geo$Y,
     group = paste0(type, "_", co$L1),
     size  = x$size[co$L1],
     type  = type
@@ -85,10 +89,14 @@ p_north_atlantic <-
   labs(title = "North Atlantic",
        caption = "Current arrows: see README citation (ICES J. Mar. Sci. 79(6):1902, 2022)")
 
-# 3. Arctic Ocean (pan-Arctic) extent -- same data, polar view
+# 3. Arctic Ocean (pan-Arctic) extent -- same data, polar view. Drop arrow
+# vertices south of the circular map extent so the southern Atlantic inflow
+# does not dangle outside it.
+north_atlantic_arctic <- north_atlantic[north_atlantic$lat >= 45, ]
+
 p_arctic_ocean <-
   basemap(limits = 45, crs = 3995, bathymetry = TRUE, legends = c(FALSE, TRUE)) +
-  current_layers(north_atlantic) +
+  current_layers(north_atlantic_arctic) +
   labs(title = "Arctic Ocean",
        caption = "Current arrows: see README citation (ICES J. Mar. Sci. 79(6):1902, 2022)")
 

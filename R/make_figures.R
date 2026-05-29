@@ -20,4 +20,4 @@ save_fig <- function(plot, name, width = 18, height = 18) {
 
 save_fig(p_barents,        "barents_currents")
 save_fig(p_north_atlantic, "north_atlantic_currents", width = 20, height = 20)
-save_fig(p_arctic_ocean,   "arctic_ocean_currents",   width = 20, height = 20)
+save_fig(p_arctic_ocean,   "arctic_ocean_currents",   width = 28, height = 20)

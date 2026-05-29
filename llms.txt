@@ -3,7 +3,7 @@
 > Expert-curated, directional ocean-current arrows for the Barents Sea and the
 > wider North Atlantic / Arctic Ocean, for use as "Figure 1"-type maps in
 > scientific publications. Provided as GIS shapefiles and tidy CSV tables, with
-> reproducible R (ggOceanMaps + sf) and Python (geopandas + matplotlib)
+> reproducible R (ggOceanMaps + sf) and Python (geopandas + cartopy)
 > pipelines. The arrows are generalizations of the *influence* of Atlantic
 > (warm) and Arctic (cold) surface currents; they are not velocity fields and
 > do not represent mass balance or seasonality.
@@ -25,7 +25,7 @@
 - [R/plot_currents.R](R/plot_currents.R): plot arrows on ggOceanMaps basemaps.
 - [R/make_figures.R](R/make_figures.R): render ready-made PDF/PNG maps.
 - [python/produce_csv.py](python/produce_csv.py): shapefiles -> tidy CSVs (geopandas).
-- [python/plot_currents.py](python/plot_currents.py): Arctic-polar preview map (matplotlib).
+- [python/plot_currents.py](python/plot_currents.py): three-panel preview on a bathymetric basemap (cartopy).
 - [requirements.txt](requirements.txt): Python dependencies.
 
 ## Conventions

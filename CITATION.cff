@@ -33,14 +33,50 @@ references:
     end: 14
     doi: "10.1016/j.pocean.2017.09.007"
   # North Atlantic / Arctic Ocean current source.
-  # TODO: confirm authors and title (could not be fetched automatically).
   - type: article
-    title: "TODO: confirm title"
+    title: "Migration patterns of Greenland halibut in the North Atlantic revealed by a compiled mark–recapture dataset"
     authors:
-      - name: "TODO: confirm authors"
+      - family-names: Vihtakari
+        given-names: Mikko
+      - family-names: Elvarsson
+        given-names: Bjarki Þór
+      - family-names: Treble
+        given-names: Margaret
+      - family-names: Nogueira
+        given-names: Adriana
+      - family-names: Hedges
+        given-names: Kevin
+      - family-names: Hussey
+        given-names: Nigel E.
+      - family-names: Wheeland
+        given-names: Laura
+      - family-names: Roy
+        given-names: Denis
+      - family-names: Ofstad
+        given-names: Lise Helen
+      - family-names: Hallfredsson
+        given-names: Elvar H.
+      - family-names: Barkley
+        given-names: Amanda
+      - family-names: Estévez-Barcia
+        given-names: Daniel
+      - family-names: Nygaard
+        given-names: Rasmus
+      - family-names: Healey
+        given-names: Brian
+      - family-names: Steingrund
+        given-names: Petur
+      - family-names: Johansen
+        given-names: Torild
+      - family-names: Albert
+        given-names: Ole Thomas
+      - family-names: Boje
+        given-names: Jesper
     year: 2022
     journal: "ICES Journal of Marine Science"
     volume: 79
     issue: 6
     start: 1902
-    url: "https://academic.oup.com/icesjms/article/79/6/1902/6646040"
+    end: 1917
+    doi: "10.1093/icesjms/fsac127"
+    url: "https://doi.org/10.1093/icesjms/fsac127"
