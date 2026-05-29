@@ -28,7 +28,7 @@ tabular/                         Derived, tidy CSV products (generated)
   north_atlantic_currents.csv    North Atlantic only            (generated)
   all_currents.csv               Barents Sea + North Atlantic   (generated)
 R/                               Modern R pipeline (sf + ggOceanMaps)
-python/                          Modern Python pipeline (geopandas + matplotlib)
+python/                          Modern Python pipeline (geopandas + cartopy)
 figure_files/                    Ready-made / preview maps
 ```
 

@@ -16,8 +16,13 @@
   `broom` dependencies. New scripts: `R/produce_csv.R`, `R/plot_currents.R`,
   `R/make_figures.R` (using `sf` + `smoothr`).
 - **Added a Python pipeline**: `python/produce_csv.py` (geopandas) and
-  `python/plot_currents.py` (matplotlib, Arctic Polar Stereographic preview),
-  with `requirements.txt`.
+  `python/plot_currents.py` (cartopy, three-panel preview on a bathymetric
+  basemap), with `requirements.txt`.
+- **README lead figures** use the ggOceanMaps maps from `R/make_figures.R`; the
+  cartopy bathymetry preview is shown under the Python section.
+- **Completed the North Atlantic source citation**: Vihtakari et al. (2022),
+  *ICES Journal of Marine Science* 79(6):1902–1917,
+  [doi:10.1093/icesjms/fsac127](https://doi.org/10.1093/icesjms/fsac127).
 - **New tidy CSV products**: `tabular/north_atlantic_currents.csv` and
   `tabular/all_currents.csv` (combined, harmonized schema with a `region`
   column). `tabular/barents_currents.csv` retained for backward compatibility.

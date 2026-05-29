@@ -4,3 +4,4 @@ pandas>=2.0
 numpy>=1.24
 matplotlib>=3.7
 pyproj>=3.5
+cartopy>=0.22  # bathymetric basemap for plot_currents.py

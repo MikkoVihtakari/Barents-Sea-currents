@@ -23,11 +23,16 @@ Research) and complemented by the knowledge of oceanographers/researchers at the
 Norwegian Polar Institute (Arild Sundfjord, Laura de Steur, Mikko Vihtakari).
 They are meant to stay updated; see *Contact information*.
 
-![Barents Sea, North Atlantic and Arctic Ocean ocean-current arrows](figure_files/python_preview.png)
+![Barents Sea ocean-current arrows](figure_files/barents_currents.png)
+
+![North Atlantic ocean-current arrows](figure_files/north_atlantic_currents.png)
+
+![Arctic Ocean ocean-current arrows](figure_files/arctic_ocean_currents.png)
 
 *The three map examples — Barents Sea, North Atlantic, and Arctic Ocean
 (warm/Atlantic in red, cold/Arctic in blue) — produced by
-[`python/plot_currents.py`](python/plot_currents.py).*
+[`R/make_figures.R`](R/make_figures.R) with
+[ggOceanMaps](https://mikkovihtakari.github.io/ggOceanMaps/).*
 
 The repository holds **two curated datasets** that drive **three map examples**:
 the detailed **Barents Sea** arrows, and the **North Atlantic** warm/cold
@@ -45,7 +50,7 @@ tabular/           Tidy CSV products (generated)
   north_atlantic_currents.csv  North Atlantic
   all_currents.csv             Barents Sea + North Atlantic
 R/                 R pipeline (sf + ggOceanMaps)
-python/            Python pipeline (geopandas + matplotlib)
+python/            Python pipeline (geopandas + cartopy)
 figure_files/      Ready-made / preview maps
 ```
 
@@ -79,7 +84,7 @@ Complete, ready-to-run examples for both the Barents Sea and the North Atlantic
 are in [`R/plot_currents.R`](R/plot_currents.R); render publication figures with
 [`R/make_figures.R`](R/make_figures.R).
 
-### Python (geopandas + matplotlib)
+### Python (geopandas + cartopy)
 
 ```bash
 pip install -r requirements.txt
@@ -89,7 +94,15 @@ python python/plot_currents.py   # -> figure_files/python_preview.png
 
 [`python/plot_currents.py`](python/plot_currents.py) reads
 [`tabular/all_currents.csv`](tabular/all_currents.csv), smooths the arrows with a
-Catmull-Rom spline, and plots them in Arctic Polar Stereographic projection.
+Catmull-Rom spline, and draws the same three map examples over a bathymetric
+basemap (Natural Earth land + shaded depth) with cartopy — the Barents Sea panel
+in UTM 33N, the North Atlantic and Arctic Ocean panels in North Polar
+Stereographic.
+
+![Python preview: the three map examples on a bathymetric basemap](figure_files/python_preview.png)
+
+*The Python workflow reproduces the three map examples on a bathymetry basemap,
+produced by [`python/plot_currents.py`](python/plot_currents.py).*
 
 ## Smoothing
 
@@ -142,9 +155,10 @@ towards monitoring of the Barents Sea ecosystem. Progress in Oceanography, 166,
 
 The North Atlantic and Arctic Ocean arrows are based on:
 
-<!-- TODO: confirm authors and title -->
-\[authors\] (2022) \[title\]. *ICES Journal of Marine Science*, 79(6), 1902.
-<https://academic.oup.com/icesjms/article/79/6/1902/6646040>
+Vihtakari M, Elvarsson BÞ, Treble M et al. (2022) Migration patterns of
+Greenland halibut in the North Atlantic revealed by a compiled mark–recapture
+dataset. *ICES Journal of Marine Science*, 79(6), 1902–1917.
+<https://doi.org/10.1093/icesjms/fsac127>
 
 ## Contact information
 
