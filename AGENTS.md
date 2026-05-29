@@ -29,8 +29,12 @@ ready-made figures (`figure_files/`).
 
 ## Conventions
 
-- **CRS:** decimal degrees = EPSG:4326; Barents UTM = EPSG:32633; pan-Arctic =
-  EPSG:3995. The `_v2` shapefiles (EPSG:3995) are the latest North Atlantic data.
+- **CRS:** decimal degrees = EPSG:4326; Barents UTM = EPSG:32633; North Atlantic
+  / pan-Arctic = EPSG:3995.
+- **Datasets:** two curated sets — Barents Sea, and North Atlantic (spans the
+  subtropical Atlantic through the Arctic Ocean). The North Atlantic set drives
+  both the North Atlantic and Arctic Ocean map examples (different extents, same
+  data).
 - **Current types:** `Atlantic` (warm, red `#d7301f`) and `Arctic`
   (cold, blue `#2166ac`). `warm`/`cold` shapefile labels map to these.
 - **Strength:** integer `size` 1–5, mapped to line width.

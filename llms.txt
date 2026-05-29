@@ -10,8 +10,9 @@
 
 ## Data
 
-- [shapefiles/](shapefiles): authoritative GIS source (edit in QGIS). Barents
-  Sea (EPSG:32633), North Atlantic and Arctic Ocean (EPSG:4326 and EPSG:3995).
+- [shapefiles/](shapefiles): authoritative GIS source (edit in QGIS). Two
+  curated datasets: Barents Sea (EPSG:32633) and North Atlantic (EPSG:3995,
+  spanning the subtropical Atlantic through the Arctic Ocean).
 - [tabular/all_currents.csv](tabular/all_currents.csv): combined tidy table
   (WGS84). One row per vertex; columns long, lat, order, group, size, type, region.
 - [tabular/north_atlantic_currents.csv](tabular/north_atlantic_currents.csv): North Atlantic subset.

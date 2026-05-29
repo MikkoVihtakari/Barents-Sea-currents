@@ -43,16 +43,17 @@ OUT = os.path.join(HERE, "tabular")
 # Source shapefiles -> (type, region). "warm" currents carry Atlantic water,
 # "cold" currents carry Arctic water; we harmonise to the Barents Sea
 # Atlantic/Arctic convention so a single colour scale works across regions.
-# The "_v2" North Atlantic files are the latest, most complete versions
-# (EPSG:3995); we reproject them to decimal degrees for the tidy tables.
+# The North Atlantic files (EPSG:3995, Arctic Polar Stereographic) span the
+# subtropical Atlantic through the Arctic Ocean; we reproject them to decimal
+# degrees for the tidy tables.
 SOURCES = {
     "Barents Sea": [
         (os.path.join(SHP, "Barents Sea", "atlantic_water.shp"), "Atlantic"),
         (os.path.join(SHP, "Barents Sea", "arctic_water.shp"), "Arctic"),
     ],
     "North Atlantic": [
-        (os.path.join(SHP, "North Atlantic", "warm_currents_v2.shp"), "Atlantic"),
-        (os.path.join(SHP, "North Atlantic", "cold_currents_v2.shp"), "Arctic"),
+        (os.path.join(SHP, "North Atlantic", "warm_currents.shp"), "Atlantic"),
+        (os.path.join(SHP, "North Atlantic", "cold_currents.shp"), "Arctic"),
     ],
 }
 

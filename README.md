@@ -23,19 +23,23 @@ Research) and complemented by the knowledge of oceanographers/researchers at the
 Norwegian Polar Institute (Arild Sundfjord, Laura de Steur, Mikko Vihtakari).
 They are meant to stay updated; see *Contact information*.
 
-![Barents Sea and North Atlantic ocean-current arrows in Arctic Polar
-Stereographic projection](figure_files/python_preview.png)
+![Barents Sea, North Atlantic and Arctic Ocean ocean-current arrows](figure_files/python_preview.png)
 
-*Barents Sea and North Atlantic ocean-current arrows (warm/Atlantic in red,
-cold/Arctic in blue), produced by [`python/plot_currents.py`](python/plot_currents.py).*
+*The three map examples — Barents Sea, North Atlantic, and Arctic Ocean
+(warm/Atlantic in red, cold/Arctic in blue) — produced by
+[`python/plot_currents.py`](python/plot_currents.py).*
+
+The repository holds **two curated datasets** that drive **three map examples**:
+the detailed **Barents Sea** arrows, and the **North Atlantic** warm/cold
+currents, which span the subtropical Atlantic through the Arctic Ocean and are
+shown both on a North Atlantic extent and as a full pan-Arctic view.
 
 ## Repository layout
 
 ```
 shapefiles/        Authoritative GIS source data (edit in QGIS)
-  Barents Sea/       atlantic_water, arctic_water         (EPSG:32633)
-  North Atlantic/    warm/cold currents (v1 EPSG:4326, v2 EPSG:3995, latest)
-  Arctic Ocean/      warm/cold currents v2               (EPSG:3995)
+  Barents Sea/       atlantic_water, arctic_water    (EPSG:32633)
+  North Atlantic/    warm_currents, cold_currents    (EPSG:3995)
 tabular/           Tidy CSV products (generated)
   barents_currents.csv         Barents Sea (legacy schema)
   north_atlantic_currents.csv  North Atlantic
@@ -102,13 +106,12 @@ spline.
 | Data            | Format    | CRS                                            |
 |-----------------|-----------|------------------------------------------------|
 | Barents Sea     | shapefile | EPSG:32633 (WGS 84 / UTM 33N)                  |
-| North Atlantic v1 | shapefile | EPSG:4326 (WGS 84 decimal degrees)           |
-| North Atlantic / Arctic Ocean v2 | shapefile | EPSG:3995 (Arctic Polar Stereographic) |
+| North Atlantic  | shapefile | EPSG:3995 (WGS 84 / Arctic Polar Stereographic)|
 | `tabular/*.csv` | CSV       | EPSG:4326 (WGS 84 decimal degrees)             |
 
-The `_v2` shapefiles are the latest, most complete North Atlantic data and are
-recommended for pan-Arctic maps (some arrows cross the 180° meridian and smear in
-decimal degrees). The tidy CSVs are generated from the `_v2` data.
+The North Atlantic shapefiles use a polar projection because some arrows cross
+the 180° meridian and would smear in decimal degrees. The tidy CSVs are
+reprojected to decimal degrees for portability.
 
 ## Regenerating the data
 
@@ -136,6 +139,12 @@ The Barents Sea arrows are modified from:
 Eriksen E, Gjøsæter H, Prozorkevich D et al. (2018) From single species surveys
 towards monitoring of the Barents Sea ecosystem. Progress in Oceanography, 166,
 4–14. <https://doi.org/10.1016/j.pocean.2017.09.007>
+
+The North Atlantic and Arctic Ocean arrows are based on:
+
+<!-- TODO: confirm authors and title -->
+\[authors\] (2022) \[title\]. *ICES Journal of Marine Science*, 79(6), 1902.
+<https://academic.oup.com/icesjms/article/79/6/1902/6646040>
 
 ## Contact information
 

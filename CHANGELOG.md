@@ -2,10 +2,15 @@
 
 ## 0.2.0 (2026-05-29)
 
-- **Added North Atlantic / Arctic Ocean currents** alongside the Barents Sea
-  arrows (`shapefiles/North Atlantic/`, `shapefiles/Arctic Ocean/`).
-- **Reorganized shapefiles** into per-region folders: `Barents Sea/`,
-  `North Atlantic/`, `Arctic Ocean/`.
+- **Added North Atlantic currents** alongside the Barents Sea arrows. The North
+  Atlantic set spans the subtropical Atlantic through the Arctic Ocean and drives
+  both the North Atlantic and Arctic Ocean map examples.
+- **Reorganized shapefiles** into per-dataset folders: `Barents Sea/` and
+  `North Atlantic/`. Removed a redundant `Arctic Ocean/` folder (byte-identical
+  duplicate of the North Atlantic data) and superseded older lower-resolution
+  North Atlantic files, keeping the latest EPSG:3995 versions.
+- **Three map examples** (Barents Sea, North Atlantic, Arctic Ocean) in both the
+  R and Python plotting scripts.
 - **Modernized plotting to [ggOceanMaps](https://mikkovihtakari.github.io/ggOceanMaps/)**;
   removed the deprecated PlotSvalbard workflow and the retired `rgdal`/`sp`/
   `broom` dependencies. New scripts: `R/produce_csv.R`, `R/plot_currents.R`,

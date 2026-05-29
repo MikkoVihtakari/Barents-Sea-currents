@@ -32,3 +32,15 @@ references:
     start: 4
     end: 14
     doi: "10.1016/j.pocean.2017.09.007"
+  # North Atlantic / Arctic Ocean current source.
+  # TODO: confirm authors and title (could not be fetched automatically).
+  - type: article
+    title: "TODO: confirm title"
+    authors:
+      - name: "TODO: confirm authors"
+    year: 2022
+    journal: "ICES Journal of Marine Science"
+    volume: 79
+    issue: 6
+    start: 1902
+    url: "https://academic.oup.com/icesjms/article/79/6/1902/6646040"

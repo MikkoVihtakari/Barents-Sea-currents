@@ -1,12 +1,12 @@
 # Render ready-made current maps to figure_files/.
 #
 # Modern replacement for the historical `Ready-made figure files.R`. Builds the
-# basemaps and current overlays defined in R/plot_currents.R and writes
-# publication-ready PDF and PNG versions.
+# three basemap examples defined in R/plot_currents.R and writes publication-
+# ready PDF and PNG versions.
 #
 #   source("R/make_figures.R")
 
-source("R/plot_currents.R")  # provides p_barents and p_north_atlantic
+source("R/plot_currents.R")  # provides p_barents, p_north_atlantic, p_arctic_ocean
 
 dir.create("figure_files", showWarnings = FALSE)
 
@@ -20,3 +20,4 @@ save_fig <- function(plot, name, width = 18, height = 18) {
 
 save_fig(p_barents,        "barents_currents")
 save_fig(p_north_atlantic, "north_atlantic_currents", width = 20, height = 20)
+save_fig(p_arctic_ocean,   "arctic_ocean_currents",   width = 20, height = 20)

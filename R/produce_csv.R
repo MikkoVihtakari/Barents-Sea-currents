@@ -16,13 +16,14 @@ library(sf)
 
 # Source shapefiles -> (type, region). "warm" = Atlantic water, "cold" =
 # Arctic water; harmonised to the Barents Atlantic/Arctic convention. The
-# North Atlantic "_v2" files are the latest, most complete versions (EPSG:3995)
-# and are reprojected to decimal degrees here.
+# North Atlantic files (EPSG:3995, Arctic Polar Stereographic) span the
+# subtropical Atlantic through the Arctic Ocean and are reprojected to decimal
+# degrees here.
 sources <- list(
-  list(file = "shapefiles/Barents Sea/atlantic_water.shp",    type = "Atlantic", region = "Barents Sea"),
-  list(file = "shapefiles/Barents Sea/arctic_water.shp",      type = "Arctic",   region = "Barents Sea"),
-  list(file = "shapefiles/North Atlantic/warm_currents_v2.shp", type = "Atlantic", region = "North Atlantic"),
-  list(file = "shapefiles/North Atlantic/cold_currents_v2.shp", type = "Arctic",   region = "North Atlantic")
+  list(file = "shapefiles/Barents Sea/atlantic_water.shp", type = "Atlantic", region = "Barents Sea"),
+  list(file = "shapefiles/Barents Sea/arctic_water.shp",   type = "Arctic",   region = "Barents Sea"),
+  list(file = "shapefiles/North Atlantic/warm_currents.shp", type = "Atlantic", region = "North Atlantic"),
+  list(file = "shapefiles/North Atlantic/cold_currents.shp", type = "Arctic",   region = "North Atlantic")
 )
 
 read_source <- function(file, type, region) {
