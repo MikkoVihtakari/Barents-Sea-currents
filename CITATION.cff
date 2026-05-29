@@ -1,0 +1,46 @@
+cff-version: 1.2.0
+message: "If you use these ocean-current arrows, please cite them as below."
+title: "Barents Sea & North Atlantic ocean-current arrows"
+version: "0.2.0"
+date-released: "2026-05-29"
+url: "https://github.com/MikkoVihtakari/Barents-Sea-currents"
+authors:
+  - family-names: Vihtakari
+    given-names: Mikko
+    email: mikko.vihtakari@gmail.com
+    affiliation: Institute of Marine Research
+    orcid: "https://orcid.org/0000-0003-0371-4319"
+  - family-names: Sundfjord
+    given-names: Arild
+    affiliation: Norwegian Polar Institute
+  - family-names: de Steur
+    given-names: Laura
+    affiliation: Norwegian Polar Institute
+references:
+  - type: article
+    title: "From single species surveys towards monitoring of the Barents Sea ecosystem"
+    authors:
+      - family-names: Eriksen
+        given-names: Elena
+      - family-names: Gjøsæter
+        given-names: Harald
+      - family-names: Prozorkevich
+        given-names: Dmitry
+    year: 2018
+    journal: "Progress in Oceanography"
+    volume: 166
+    start: 4
+    end: 14
+    doi: "10.1016/j.pocean.2017.09.007"
+  # North Atlantic / Arctic Ocean current source.
+  # TODO: confirm authors and title (could not be fetched automatically).
+  - type: article
+    title: "TODO: confirm title"
+    authors:
+      - name: "TODO: confirm authors"
+    year: 2022
+    journal: "ICES Journal of Marine Science"
+    volume: 79
+    issue: 6
+    start: 1902
+    url: "https://academic.oup.com/icesjms/article/79/6/1902/6646040"

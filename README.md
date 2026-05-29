@@ -1,88 +1,152 @@
 
-# Barents Sea ocean-current arrows
+# Barents Sea & North Atlantic ocean-current arrows
 
-**Data repository for updated Barents Sea ocean current arrows
-(Institute of Marine Research and Norwegian Polar Institute). Version
-0.1.1 (2022-03-04)**
+**Data repository for updated Barents Sea and North Atlantic ocean-current
+arrows (Institute of Marine Research and Norwegian Polar Institute). Version
+0.2.0 (2026-05-29)**
 
-This site contains geospatial data for Barents Sea ocean current arrows,
-which are meant for scientific publications as *“Figure 1”*-type arrows
-indicating the *influence* of Atlantic and Arctic surface currents on
-different areas within the region. The current arrows are
-generalizations and do not consider mass-balance, seasonality, or other
-variations. The arrows are, however, based on the current understanding
-of ocean currents in the Barents and Greenland Sea regions.
+This repository contains geospatial data for ocean-current arrows meant for
+scientific publications as *“Figure 1”*-type arrows indicating the *influence*
+of Atlantic (warm) and Arctic (cold) surface currents on different areas. The
+arrows are **generalizations** and do not consider mass balance, seasonality, or
+other variations. They are based on the current understanding of ocean currents
+in the Barents Sea, Greenland Sea, North Atlantic, and Arctic Ocean.
 
-The arrows are based on publications by Harald Gjøsæter at Institute of
-Marine Research and complemented by the knowledge of
-oceanographers/researchers at the Norwegian Polar Institute (Arild
-Sundfjord, Laura de Steur, Mikko Vihtakari). These current arrows are
-meant to stay updated and any new knowledge/discussions about the arrows
-can be directed to the site maintainer (see the *Contact information*
-section).
+Version 0.2 adds **North Atlantic / Arctic Ocean** currents alongside the
+original Barents Sea arrows, modernizes the plotting to
+[**ggOceanMaps**](https://mikkovihtakari.github.io/ggOceanMaps/) (replacing the
+deprecated PlotSvalbard package and the retired `rgdal`/`sp` stack), and adds a
+Python workflow.
 
-![Figure 1. Barents Sea ocean currents produced by the PlotSvalbard
-package](README_files/figure-gfm/unnamed-chunk-1-1.png) Figure 1.
-Barents Sea ocean currents produced by the PlotSvalbard package
+The arrows are based on publications by Harald Gjøsæter (Institute of Marine
+Research) and complemented by the knowledge of oceanographers/researchers at the
+Norwegian Polar Institute (Arild Sundfjord, Laura de Steur, Mikko Vihtakari).
+They are meant to stay updated; see *Contact information*.
+
+![Barents Sea, North Atlantic and Arctic Ocean ocean-current arrows](figure_files/python_preview.png)
+
+*The three map examples — Barents Sea, North Atlantic, and Arctic Ocean
+(warm/Atlantic in red, cold/Arctic in blue) — produced by
+[`python/plot_currents.py`](python/plot_currents.py).*
+
+The repository holds **two curated datasets** that drive **three map examples**:
+the detailed **Barents Sea** arrows, and the **North Atlantic** warm/cold
+currents, which span the subtropical Atlantic through the Arctic Ocean and are
+shown both on a North Atlantic extent and as a full pan-Arctic view.
+
+## Repository layout
+
+```
+shapefiles/        Authoritative GIS source data (edit in QGIS)
+  Barents Sea/       atlantic_water, arctic_water    (EPSG:32633)
+  North Atlantic/    warm_currents, cold_currents    (EPSG:3995)
+tabular/           Tidy CSV products (generated)
+  barents_currents.csv         Barents Sea (legacy schema)
+  north_atlantic_currents.csv  North Atlantic
+  all_currents.csv             Barents Sea + North Atlantic
+R/                 R pipeline (sf + ggOceanMaps)
+python/            Python pipeline (geopandas + matplotlib)
+figure_files/      Ready-made / preview maps
+```
+
+See [`DATA_DICTIONARY.md`](DATA_DICTIONARY.md) for the full schema and CRS
+reference, and [`AGENTS.md`](AGENTS.md) for contributor/agent conventions.
 
 ## Usage
 
-The current arrows are stored as directed spatial lines with relatively
-few nodes to make editing of the current arrows easier. The
-[**PlotSvalbard**](https://github.com/MikkoVihtakari/PlotSvalbard)
-package runs an X-spline (`graphics::xspline(..., shape = -0.6)`)
-through the nodes before plotting making the arrows appear smoothed.
-People using other software than R (GIS distributions, Python, Matlab,
-etc.) can use a similar strategy to smooth the arrows (the code to do
-the smoothing is included in
-[`Smooth csv and plot.R`](https://github.com/MikkoVihtakari/Barents-Sea-currents/blob/master/Smooth%20csv%20and%20plot.R)
-file).
+### R (ggOceanMaps)
 
-![Figure 2. Original data with few nodes (A) and smoothed (B) Barents
-Sea ocean current arrows. The original data has few nodes to make
-editing the current arrows
-easier.](README_files/figure-gfm/unnamed-chunk-2-1.png) Figure 2.
-Original data with few nodes (A) and smoothed (B) Barents Sea ocean
-current arrows. The original data has few nodes to make editing the
-current arrows easier.
+```r
+# install.packages(c("ggOceanMaps", "sf", "smoothr", "ggplot2"))
+library(ggOceanMaps)
+library(sf)
+library(smoothr)
+library(ggplot2)
 
-## File types
+# Read, smooth and reproject an Atlantic-water arrow set to UTM 33N
+cur <- sf::st_read("shapefiles/Barents Sea/atlantic_water.shp", quiet = TRUE) |>
+  sf::st_transform(4326) |>
+  smoothr::smooth(method = "spline") |>
+  sf::st_transform(32633)
 
-The data for current arrows are provided as
-[**shapefiles**](https://github.com/MikkoVihtakari/Barents-Sea-currents/tree/master/shapefiles)
-and [tabular format
-(**csv**)](https://github.com/MikkoVihtakari/Barents-Sea-currents/tree/master/tabular)
-in separate folders in the repository. Further, the same data are
-available as smoothed tabular format in the **PlotSvalbard** package
-([barents\_currents.rda](https://github.com/MikkoVihtakari/PlotSvalbard/blob/master/data/barents_currents.rda)).
-The shapefiles and barents\_currents.rda are in `epsg:32633`
-georeference system, while the csv file in this repository is in decimal
-degrees.
+basemap(limits = c(-5, 60, 68, 83), crs = 32633, bathymetry = TRUE) +
+  geom_sf(data = cur, aes(linewidth = size), color = "#d7301f",
+          arrow = arrow(type = "open", angle = 15, length = unit(0.25, "lines"))) +
+  scale_linewidth(range = c(0.3, 1.3))
+```
 
-The repository also contains [ready-made Barents Sea
-maps](https://github.com/MikkoVihtakari/Barents-Sea-currents/tree/master/figure_files)
-for presentations and publications. Other files included in the
-repository are R scripts used to convert the original shapefiles.
+Complete, ready-to-run examples for both the Barents Sea and the North Atlantic
+are in [`R/plot_currents.R`](R/plot_currents.R); render publication figures with
+[`R/make_figures.R`](R/make_figures.R).
+
+### Python (geopandas + matplotlib)
+
+```bash
+pip install -r requirements.txt
+python python/produce_csv.py     # shapefiles -> tidy CSVs
+python python/plot_currents.py   # -> figure_files/python_preview.png
+```
+
+[`python/plot_currents.py`](python/plot_currents.py) reads
+[`tabular/all_currents.csv`](tabular/all_currents.csv), smooths the arrows with a
+Catmull-Rom spline, and plots them in Arctic Polar Stereographic projection.
+
+## Smoothing
+
+The arrows are stored as directed lines with relatively **few nodes** to make
+editing easy. Run a spline through the nodes before plotting so the arrows appear
+smooth (R: `smoothr::smooth(method = "spline")`; Python: Catmull-Rom in
+`plot_currents.py`). The historical PlotSvalbard workflow used
+`graphics::xspline(..., shape = -0.6)`; the modern approaches reproduce the same
+look. Users of other software (GIS, Matlab, etc.) can apply any equivalent
+spline.
+
+## File types and coordinate systems
+
+| Data            | Format    | CRS                                            |
+|-----------------|-----------|------------------------------------------------|
+| Barents Sea     | shapefile | EPSG:32633 (WGS 84 / UTM 33N)                  |
+| North Atlantic  | shapefile | EPSG:3995 (WGS 84 / Arctic Polar Stereographic)|
+| `tabular/*.csv` | CSV       | EPSG:4326 (WGS 84 decimal degrees)             |
+
+The North Atlantic shapefiles use a polar projection because some arrows cross
+the 180° meridian and would smear in decimal degrees. The tidy CSVs are
+reprojected to decimal degrees for portability.
+
+## Regenerating the data
+
+```bash
+python python/produce_csv.py   # Python (geopandas)
+Rscript R/produce_csv.R        # R (sf) — identical schema
+```
 
 ## Citations
 
 If you use the arrows in your publications, please cite them as:
 
-Vihtakari M, Sundfjord A, de Steur L (2019). Barents Sea ocean-current
-arrows modified from Eriksen et al. (2018). Norwegian Polar Institute
-and Institute of Marine Research. Available at:
+Vihtakari M, Sundfjord A, de Steur L (2019). Barents Sea ocean-current arrows
+modified from Eriksen et al. (2018). Norwegian Polar Institute and Institute of
+Marine Research. Available at:
 <https://github.com/MikkoVihtakari/Barents-Sea-currents>
+
+When plotting with ggOceanMaps, please also cite that package and its underlying
+data sources (`citation("ggOceanMaps")`).
 
 ## References
 
-The current arrows are modified from:
+The Barents Sea arrows are modified from:
 
-Eriksen E, Gjøsæter H, Prozorkevich D et al. (2018) From single species
-surveys towards monitoring of the Barents Sea ecosystem. Progress in
-Oceanography, 166, 4–14.
-<doi:https://doi.org/10.1016/j.pocean.2017.09.007>
+Eriksen E, Gjøsæter H, Prozorkevich D et al. (2018) From single species surveys
+towards monitoring of the Barents Sea ecosystem. Progress in Oceanography, 166,
+4–14. <https://doi.org/10.1016/j.pocean.2017.09.007>
+
+The North Atlantic and Arctic Ocean arrows are based on:
+
+<!-- TODO: confirm authors and title -->
+\[authors\] (2022) \[title\]. *ICES Journal of Marine Science*, 79(6), 1902.
+<https://academic.oup.com/icesjms/article/79/6/1902/6646040>
 
 ## Contact information
 
-Any corrections, suggestions or other discussion can be directed to the
-site maintainer (<mikko.vihtakari@gmail.com>)
+Any corrections, suggestions, or other discussion can be directed to the site
+maintainer (<mikko.vihtakari@gmail.com>).
