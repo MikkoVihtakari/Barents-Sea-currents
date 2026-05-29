@@ -1,0 +1,46 @@
+# Barents Sea & North Atlantic ocean-current arrows
+
+> Expert-curated, directional ocean-current arrows for the Barents Sea and the
+> wider North Atlantic / Arctic Ocean, for use as "Figure 1"-type maps in
+> scientific publications. Provided as GIS shapefiles and tidy CSV tables, with
+> reproducible R (ggOceanMaps + sf) and Python (geopandas + matplotlib)
+> pipelines. The arrows are generalizations of the *influence* of Atlantic
+> (warm) and Arctic (cold) surface currents; they are not velocity fields and
+> do not represent mass balance or seasonality.
+
+## Data
+
+- [shapefiles/](shapefiles): authoritative GIS source (edit in QGIS). Barents
+  Sea (EPSG:32633), North Atlantic and Arctic Ocean (EPSG:4326 and EPSG:3995).
+- [tabular/all_currents.csv](tabular/all_currents.csv): combined tidy table
+  (WGS84). One row per vertex; columns long, lat, order, group, size, type, region.
+- [tabular/north_atlantic_currents.csv](tabular/north_atlantic_currents.csv): North Atlantic subset.
+- [tabular/barents_currents.csv](tabular/barents_currents.csv): legacy Barents-only table.
+- [DATA_DICTIONARY.md](DATA_DICTIONARY.md): full schema, CRS and folder reference.
+
+## Code
+
+- [R/produce_csv.R](R/produce_csv.R): shapefiles -> tidy CSVs (sf).
+- [R/plot_currents.R](R/plot_currents.R): plot arrows on ggOceanMaps basemaps.
+- [R/make_figures.R](R/make_figures.R): render ready-made PDF/PNG maps.
+- [python/produce_csv.py](python/produce_csv.py): shapefiles -> tidy CSVs (geopandas).
+- [python/plot_currents.py](python/plot_currents.py): Arctic-polar preview map (matplotlib).
+- [requirements.txt](requirements.txt): Python dependencies.
+
+## Conventions
+
+- Current `type`: `Atlantic` (warm, red `#d7301f`) or `Arctic` (cold, blue
+  `#2166ac`). Shapefile `warm`/`cold` labels map to `Atlantic`/`Arctic`.
+- `size`: relative strength 1 (weak) to 5 (strong), mapped to line width.
+- Arrows have sparse nodes; smooth before plotting (spline / Catmull-Rom).
+- Plotting in R uses ggOceanMaps (PlotSvalbard and rgdal/sp/broom are removed).
+
+## Guidance
+
+- [AGENTS.md](AGENTS.md): rules for editing the data and pipelines.
+
+## Citation
+
+Vihtakari M, Sundfjord A, de Steur L (2019). Barents Sea ocean-current arrows
+modified from Eriksen et al. (2018). Norwegian Polar Institute and Institute of
+Marine Research. https://github.com/MikkoVihtakari/Barents-Sea-currents

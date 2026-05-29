@@ -1,0 +1,6 @@
+# Python dependencies for the produce_csv.py / plot_currents.py pipelines.
+geopandas>=0.14
+pandas>=2.0
+numpy>=1.24
+matplotlib>=3.7
+pyproj>=3.5
