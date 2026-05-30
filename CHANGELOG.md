@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.2.1 (2026-05-30)
+
+- **Current arrows now sit under the coastline** in the R maps via
+  `ggOceanMaps::reorder_layers()`, matching a published "Figure 1" look.
+- **Fixed the Arctic Ocean R map**: dropped the redundant `crs = 3995` argument
+  (the circular `limits = 45` basemap already fixes the CRS to EPSG:3995) and
+  rendered the ready-made figures on a white background, so the Arctic legend is
+  no longer lost against the transparent margin.
+- **README lead figure** is now a single side-by-side `figure_files/r_preview.png`
+  (three panels + shared legend, the R counterpart of `python_preview.png`),
+  replacing the three vertically stacked maps. Each panel is still saved on its
+  own in `figure_files/`.
+- **Removed the legacy PlotSvalbard renders** (`blue_bathy*`, `grey_bathy*`),
+  superseded by the ggOceanMaps figures.
+
 ## 0.2.0 (2026-05-29)
 
 - **Added North Atlantic currents** alongside the Barents Sea arrows. The North

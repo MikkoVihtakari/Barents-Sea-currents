@@ -3,7 +3,7 @@
 
 **Data repository for updated Barents Sea and North Atlantic ocean-current
 arrows (Institute of Marine Research and Norwegian Polar Institute). Version
-0.2.0 (2026-05-29)**
+0.2.1 (2026-05-30)**
 
 This repository contains geospatial data for ocean-current arrows meant for
 scientific publications as *“Figure 1”*-type arrows indicating the *influence*
@@ -23,16 +23,17 @@ Research) and complemented by the knowledge of oceanographers/researchers at the
 Norwegian Polar Institute (Arild Sundfjord, Laura de Steur, Mikko Vihtakari).
 They are meant to stay updated; see *Contact information*.
 
-![Barents Sea ocean-current arrows](figure_files/barents_currents.png)
-
-![North Atlantic ocean-current arrows](figure_files/north_atlantic_currents.png)
-
-![Arctic Ocean ocean-current arrows](figure_files/arctic_ocean_currents.png)
+![The three map examples produced with ggOceanMaps](figure_files/r_preview.png)
 
 *The three map examples — Barents Sea, North Atlantic, and Arctic Ocean
 (warm/Atlantic in red, cold/Arctic in blue) — produced by
 [`R/make_figures.R`](R/make_figures.R) with
-[ggOceanMaps](https://mikkovihtakari.github.io/ggOceanMaps/).*
+[ggOceanMaps](https://mikkovihtakari.github.io/ggOceanMaps/). Each panel is also
+saved on its own as a publication-ready PDF/PNG in
+[`figure_files/`](figure_files/)
+([Barents Sea](figure_files/barents_currents.png),
+[North Atlantic](figure_files/north_atlantic_currents.png),
+[Arctic Ocean](figure_files/arctic_ocean_currents.png)).*
 
 The repository holds **two curated datasets** that drive **three map examples**:
 the detailed **Barents Sea** arrows, and the **North Atlantic** warm/cold
@@ -74,10 +75,14 @@ cur <- sf::st_read("shapefiles/Barents Sea/atlantic_water.shp", quiet = TRUE) |>
   smoothr::smooth(method = "spline") |>
   sf::st_transform(32633)
 
-basemap(limits = c(-5, 60, 68, 83), crs = 32633, bathymetry = TRUE) +
-  geom_sf(data = cur, aes(linewidth = size), color = "#d7301f",
-          arrow = arrow(type = "open", angle = 15, length = unit(0.25, "lines"))) +
-  scale_linewidth(range = c(0.3, 1.3))
+# reorder_layers() tucks the arrows under the coastline (otherwise the basemap
+# draws land first and the arrows sit on top of it).
+reorder_layers(
+  basemap(limits = c(-5, 60, 68, 83), crs = 32633, bathymetry = TRUE) +
+    geom_sf(data = cur, aes(linewidth = size), color = "#d7301f",
+            arrow = arrow(type = "open", angle = 15, length = unit(0.25, "lines"))) +
+    scale_linewidth(range = c(0.3, 1.3))
+)
 ```
 
 Complete, ready-to-run examples for both the Barents Sea and the North Atlantic

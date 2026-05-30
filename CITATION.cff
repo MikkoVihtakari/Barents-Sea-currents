@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 message: "If you use these ocean-current arrows, please cite them as below."
 title: "Barents Sea & North Atlantic ocean-current arrows"
-version: "0.2.0"
-date-released: "2026-05-29"
+version: "0.2.1"
+date-released: "2026-05-30"
 url: "https://github.com/MikkoVihtakari/Barents-Sea-currents"
 authors:
   - family-names: Vihtakari
