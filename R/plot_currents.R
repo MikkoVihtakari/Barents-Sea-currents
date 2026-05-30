@@ -28,6 +28,11 @@ cur_cols <- c(Atlantic = "#d7301f", Arctic = "#2166ac")  # warm = red, cold = bl
 cur_arrow <- arrow(type = "open", angle = 15, ends = "last",
                    length = unit(0.25, "lines"))
 
+# The current arrows are added on top of the basemap, so they would otherwise be
+# drawn over land. reorder_layers() pushes ggOceanMaps' land/glacier/grid layers
+# back on top, tucking the arrows underneath the coastline like a published map.
+under_land <- function(p) ggOceanMaps::reorder_layers(p)
+
 # Read a current shapefile, smooth the nodes into curves, reproject to the
 # basemap CRS and return a tidy data frame ready for geom_path(). `lat` carries
 # the geographic latitude of each vertex so a polar map can drop arrows that
@@ -65,12 +70,12 @@ barents <- rbind(
   load_currents("shapefiles/Barents Sea/arctic_water.shp",   "Arctic",   32633)
 )
 
-p_barents <-
+p_barents <- under_land(
   basemap(limits = c(-5, 60, 68, 83), crs = 32633, bathymetry = TRUE,
           legends = c(FALSE, TRUE)) +
   current_layers(barents) +
   labs(title = "Barents Sea",
-       caption = "Vihtakari et al. (2019), modified from Eriksen et al. (2018)")
+       caption = "Vihtakari et al. (2019), modified from Eriksen et al. (2018)"))
 
 # ---------------------------------------------------------------------------
 # North Atlantic currents in Arctic Polar Stereographic (EPSG:3995). The same
@@ -82,23 +87,25 @@ north_atlantic <- rbind(
 )
 
 # 2. North Atlantic extent
-p_north_atlantic <-
+p_north_atlantic <- under_land(
   basemap(limits = c(-80, 30, 40, 82), crs = 3995, bathymetry = TRUE,
           legends = c(FALSE, TRUE)) +
   current_layers(north_atlantic) +
   labs(title = "North Atlantic",
-       caption = "Current arrows: see README citation (ICES J. Mar. Sci. 79(6):1902, 2022)")
+       caption = "Current arrows: see README citation (ICES J. Mar. Sci. 79(6):1902, 2022)"))
 
 # 3. Arctic Ocean (pan-Arctic) extent -- same data, polar view. Drop arrow
 # vertices south of the circular map extent so the southern Atlantic inflow
 # does not dangle outside it.
 north_atlantic_arctic <- north_atlantic[north_atlantic$lat >= 45, ]
 
-p_arctic_ocean <-
-  basemap(limits = 45, crs = 3995, bathymetry = TRUE, legends = c(FALSE, TRUE)) +
+# `limits = 45` makes a circular pan-Arctic basemap; ggOceanMaps fixes its CRS to
+# EPSG:3995, the same projection the arrows are reprojected to, so they align.
+p_arctic_ocean <- under_land(
+  basemap(limits = 45, bathymetry = TRUE, legends = c(FALSE, TRUE)) +
   current_layers(north_atlantic_arctic) +
   labs(title = "Arctic Ocean",
-       caption = "Current arrows: see README citation (ICES J. Mar. Sci. 79(6):1902, 2022)")
+       caption = "Current arrows: see README citation (ICES J. Mar. Sci. 79(6):1902, 2022)"))
 
 # Display when run interactively
 if (interactive()) {
